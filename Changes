@@ -1,0 +1,10 @@
+Revision history for Module-Version
+
+0.02    10.04.10
+        * Bumping version for test script
+        * Adding Module::Version::App
+        * Adding module-version script
+
+0.01    10.04.10
+        First version, released on an unsuspecting world.
+
