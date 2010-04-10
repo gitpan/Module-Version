@@ -6,8 +6,8 @@ use warnings;
 use base 'Exporter';
 use Carp;
 
-our $VERSION   = '0.02';
-our @EXPORT_OK = qw(get_version);
+our $VERSION   = '0.03';
+our @EXPORT_OK = 'get_version';
 
 sub get_version {
     my $module = shift or croak "Must get a module name\n";
@@ -32,11 +32,11 @@ __END__
 
 =head1 NAME
 
-Module::Version - Fetch versions of modules
+Module::Version - Get module versions
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
@@ -56,23 +56,25 @@ Or using C<module-version>:
     $ module-version Doesnt::Exist
     Warning: module 'Doesnt::Exist' does not seem to be installed.
 
-    $ module-version -q Doesnt::Exist
+    $ module-version --quiet Doesnt::Exist
     (no output)
 
-    $ module-version --full Search::GIN
+    $ module-version --full Search::GIN Moose
     Search::GIN 0.04
+    Moose 1.01
 
     $ module-version --input modules.txt
     Search::GIN 0.04
     Data::Collector 0.03
     Moose 1.01
-    Dancer -
 
 =head1 EXPORT
 
 =head2 get_version
 
-c<get_version> will be exported if you want it.
+C<get_version> will be exported if explicitly specified.
+
+    use Module::Version 'get_version';
 
 B<Nothing> is exported by default.
 

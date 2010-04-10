@@ -6,7 +6,7 @@ use warnings;
 use Getopt::Long;
 use Module::Version 'get_version';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new { return bless {}, shift }
 
@@ -31,14 +31,14 @@ sub run {
     }
 
     if ( scalar @modules == 0 ) {
-        $self->error('No modules to check');
+        $self->error('no modules to check');
     }
 
     foreach my $module (@modules) {
         my $version = get_version($module);
         if ( !$version ) {
             if ( ! $self->{'quiet'} ) {
-                $self->warn("module '$module' does not seem to be installed");
+                $self->warn("module '$module' does not seem to be installed.");
             }
 
             next;
@@ -58,7 +58,7 @@ sub parse_args {
         'i|input=s' => \$self->{'input'},
         'q|quiet!'  => \$self->{'quiet'},
         '<>'        => sub { $self->process(@_) },
-    ) or $self->error('Could not parse options');
+    ) or $self->error('could not parse options');
 }
 
 sub process {
@@ -104,7 +104,7 @@ Module::Version::App - Application implementation for Module::Version
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
