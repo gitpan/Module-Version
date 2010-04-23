@@ -1,5 +1,13 @@
 Revision history for Module-Version
 
+0.05    23.04.10
+        * Using high minimum version of ExtUtils::MakeMaker to avoid test
+          errors.
+
+0.04    21.04.10
+        * Switched to use ExtUtils::MakeMaker instead of evaling.
+        (it's now _way_ faster than before)
+
 0.03    10.04.10
         * Docs fix
         * Better test coverage
