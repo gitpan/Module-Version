@@ -3,10 +3,11 @@ package Module::Version::App;
 use strict;
 use warnings;
 
+use autodie;
 use Getopt::Long;
 use Module::Version 'get_version';
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new { return bless {}, shift }
 
@@ -14,20 +15,20 @@ sub run {
     my $self    = shift;
     my @modules = ();
 
-    $self->parse_args;
+    $self->parse_opts;
 
     if ( my $modules = $self->{'modules'} ) {
         push @modules, @{$modules};
     }
 
     if ( my $file = $self->{'input'} ) {
-        open my $fh, '<', $file or die "Can't open file '$file': $!\n";
+        open my $fh, '<', $file;
 
         my @extra_modules = <$fh>;
         chomp @extra_modules;
         push @modules, @extra_modules;
 
-        close $fh or die "Can't close file '$file': $!\n";
+        close $fh;
     }
 
     if ( scalar @modules == 0 ) {
@@ -51,7 +52,7 @@ sub run {
     }
 }
 
-sub parse_args {
+sub parse_opts {
     my $self = shift;
 
     GetOptions(
@@ -108,7 +109,7 @@ Module::Version::App - Application implementation for Module::Version
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
@@ -130,7 +131,7 @@ Create a new object.
 
 Do all the grunt work.
 
-=head2 parse_args
+=head2 parse_opts
 
 Parsing the command line arguments using L<Getopt::Long>.
 
@@ -160,11 +161,15 @@ Sawyer X, C<< <xsawyerx at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-module-version at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-Version>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+Please report any bugs or feature requests to
+C<bug-module-version at rt.cpan.org>, or through the web interface at
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-Version>.  I will be
+notified, and then you'll automatically be notified of progress on your bug as I
+make changes.
 
 =head1 SUPPORT
+
+This module sports 100% test coverage, but in case you have more issues...
 
 You can find documentation for this module with the perldoc command.
 
